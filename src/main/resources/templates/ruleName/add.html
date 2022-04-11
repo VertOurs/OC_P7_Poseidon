@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Home</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+
+	<div class="row">
+		<h2>Add New Rule</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleNameDTO}" method="post"
+			  class="form-horizontal" style="width: 100%">
+
+			<div class="form-group">
+				<label for="name" class="col-form-label">Name</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Name" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{name}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="description" class="col-form-label">Description</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Description" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{description}"> </span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label for="json" class="col-form-label">Json</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{json}" type="text" class="form-control" id="json" placeholder="Json" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{json}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="template" class="col-form-label">Template</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{template}" type="text" class="form-control" id="template" placeholder="Template" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{template}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="sqlStr" class="col-form-label">sqlStr</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{sqlStr}" type="text" class="form-control" id="sqlStr" placeholder="SqlStr" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{sqlStr}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="sqlPart" class="col-form-label">SqlPart</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{sqlPart}" type="text" class="form-control" id="sqlPart" placeholder="SqlPart" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{sqlPart}"> </span>
+					</div>
+				</div>
+			</div>
+			<!-- Buttons action -->
+			<div class="form-group" style="margin-top: 20px">
+				<div class="col-md-8">
+					<a class="btn btn-danger" th:href="@{ruleName/list}" >Cancel</a>
+					<input class="btn btn-primary" type="submit" value="Add BidList">
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

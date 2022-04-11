@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Home</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<h2>Update CurvePoint</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/curvePoint/update/{id}(id=${id})}" th:object="${curvePointDTO}" method="post"
+			  class="form-horizontal" style="width: 100%">
+
+			<div class="form-group">
+				<label for="curveId" class="col-form-label">curveId</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{curveId}" type="number" class="form-control" id="curveId" placeholder="Curve Id" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{curveId}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="term" class="col-form-label">term</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{term}" type="number" class="form-control" id="term" placeholder="Term" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{term}"> </span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label for="value" class="col-form-label">value</label>
+				<div class="col-md-8">
+					<div>
+						<input th:field="*{value}" type="number" class="form-control" id="value" placeholder="Value" >
+					</div>
+					<div>
+						<span class="text-danger" th:errors="*{value}"> </span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Buttons action -->
+			<div class="form-group" style="margin-top: 20px">
+				<div class="col-md-8">
+					<a class="btn btn-danger" th:href="@{curvePoint/list}" >Cancel</a>
+					<input class="btn btn-primary" type="submit" value="Update CurvePoint">
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>
