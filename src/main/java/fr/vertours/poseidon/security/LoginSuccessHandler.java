@@ -29,7 +29,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             log.debug("AdminRole : Admin, redirect URL : "+ redirectURL);
         } else {
             log.debug("redirect URL : "+ redirectURL);
-            redirectURL = "/trade";
+            redirectURL = "/trade/list";
         }
         response.sendRedirect(redirectURL);
 

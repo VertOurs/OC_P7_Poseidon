@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("app")
 public class LoginController {
 
     private UserRepository userRepository;
@@ -17,15 +16,10 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-//    @GetMapping("login")
-//    public ModelAndView login() {
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("login");
-//        return mav;
-//    }
-    @GetMapping("login")
-    public String login() {
-        return "login";
+
+    @GetMapping("app-logout")
+    public String loginOut() {
+        return "logout";
     }
 
     @GetMapping("secure/article-details")

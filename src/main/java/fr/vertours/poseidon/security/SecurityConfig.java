@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         String[] ressources = new String[] {
-                "/", "/css/**", "/img/**", "/app/**"
+                "/", "/css/**", "/img/**", "/app/**",
         };
         String[] userEP = new String[] {
                 "/trade/**", "/ruleName/**", "/rating/**",
@@ -38,19 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(adminEP).hasAuthority("ADMIN")
                 .antMatchers(userEP).hasAnyAuthority("USER","ADMIN" )
-                .antMatchers(ressources)
-                .permitAll().anyRequest().authenticated()
+                .antMatchers(ressources).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                //.loginPage("/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .successHandler(successHandler)
-                .permitAll()
-                .and().rememberMe()
+                    .formLogin()
+                    .successHandler(successHandler).permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/");
+                    .logout()
+                    .logoutUrl("user/app-logout")
+                    .logoutSuccessUrl("/")
+                    .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/app/error")
+                ;
 
     }
 
