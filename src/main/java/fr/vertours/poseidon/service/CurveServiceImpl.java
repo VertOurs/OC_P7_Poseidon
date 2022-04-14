@@ -2,6 +2,7 @@ package fr.vertours.poseidon.service;
 
 import fr.vertours.poseidon.domain.CurvePoint;
 import fr.vertours.poseidon.dto.CurvePointDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.CurvePointRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class CurveServiceImpl implements ICurveService {
     @Override
     public CurvePoint findId(Integer id) {
         CurvePoint curvePoint = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
         return curvePoint;
     }
 
@@ -46,7 +47,7 @@ public class CurveServiceImpl implements ICurveService {
     @Transactional
     public void updateId(Integer id, CurvePointDTO dto) {
         CurvePoint curvePoint = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
 
         curvePoint.setCurveId(dto.getCurveId());
         curvePoint.setTerm(dto.getTerm());

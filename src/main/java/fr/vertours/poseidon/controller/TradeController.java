@@ -2,6 +2,7 @@ package fr.vertours.poseidon.controller;
 
 import fr.vertours.poseidon.domain.Trade;
 import fr.vertours.poseidon.dto.TradeDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.ITradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(TradeDTO dto) {
+    public String addTradeForm(TradeDTO dto) {
         return "trade/add";
     }
 
@@ -51,7 +52,7 @@ public class TradeController {
                                  TradeDTO dto) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -74,7 +75,7 @@ public class TradeController {
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";

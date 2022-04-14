@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/app")
 public class LoginController {
 
     private UserRepository userRepository;
@@ -15,20 +16,19 @@ public class LoginController {
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-
-    @GetMapping("app-logout")
-    public String loginOut() {
-        return "logout";
+    @GetMapping("/login")
+    public ModelAndView login() {
+        return new ModelAndView("login");
     }
 
-    @GetMapping("secure/article-details")
-    public ModelAndView getAllUserArticles() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
-        mav.setViewName("user/list");
-        return mav;
-    }
+
+//    @GetMapping("secure/article-details")
+//    public ModelAndView getAllUserArticles() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("users", userRepository.findAll());
+//        mav.setViewName("user/list");
+//        return mav;
+//    }
 
     @GetMapping("error")
     public ModelAndView error() {
@@ -36,6 +36,13 @@ public class LoginController {
         String errorMessage= "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);
         mav.setViewName("403");
+        return mav;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logout() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("logout");
         return mav;
     }
 }

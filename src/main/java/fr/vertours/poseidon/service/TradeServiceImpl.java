@@ -2,6 +2,7 @@ package fr.vertours.poseidon.service;
 
 import fr.vertours.poseidon.domain.Trade;
 import fr.vertours.poseidon.dto.TradeDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.TradeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,14 +39,14 @@ public class TradeServiceImpl implements ITradeService {
     @Override
     public Trade findId(Integer id) {
         Trade trade = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
         return trade;
     }
 
     @Override
     public void updateId(Integer id, TradeDTO dto) {
         Trade trade = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
         trade.setAccount(dto.getAccount());
         trade.setType(dto.getType());
         trade.setBuyQuantity(dto.getBuyQuantity());

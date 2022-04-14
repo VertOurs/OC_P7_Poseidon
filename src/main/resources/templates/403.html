@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-      <title>Spring Boot</title>
+      <title>403</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
    <h3>Access Denied Exception</h3>
@@ -12,5 +13,6 @@
 	    </form>
    </div> 	 
     <p class="error" th:text="${errorMsg}">Error</p>
+    <a th:href="@{/curvePoint/list.html}">Go back to Curve List</a>
 </body>
 </html>   

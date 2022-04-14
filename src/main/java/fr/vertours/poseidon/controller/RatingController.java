@@ -1,7 +1,7 @@
 package fr.vertours.poseidon.controller;
 
-import fr.vertours.poseidon.domain.Rating;
 import fr.vertours.poseidon.dto.RatingDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IRatingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -51,7 +51,7 @@ public class RatingController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RatingDTO dto) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -75,7 +75,7 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";

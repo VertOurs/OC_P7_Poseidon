@@ -2,6 +2,7 @@ package fr.vertours.poseidon.controller;
 
 import fr.vertours.poseidon.domain.RuleName;
 import fr.vertours.poseidon.dto.RuleNameDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IRuleNameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,7 @@ public class RuleNameController {
                                  RuleNameDTO dto) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -75,7 +76,7 @@ public class RuleNameController {
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";

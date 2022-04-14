@@ -3,6 +3,7 @@ package fr.vertours.poseidon.controller;
 
 
 import fr.vertours.poseidon.dto.CurvePointDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.ICurveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class CurveController {
                                  CurvePointDTO dto) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -71,7 +72,7 @@ public class CurveController {
         }
         try {
             service.updateId(id, dto);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -83,7 +84,7 @@ public class CurveController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";

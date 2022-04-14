@@ -2,6 +2,7 @@ package fr.vertours.poseidon.controller;
 
 import fr.vertours.poseidon.domain.User;
 import fr.vertours.poseidon.dto.UserDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.UserRepository;
 import fr.vertours.poseidon.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(UserDTO dto) {
+    public String addUserForm(UserDTO dto) {
         return "user/add";
     }
 
@@ -55,7 +56,7 @@ public class UserController {
                                  UserDTO dto) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -72,7 +73,7 @@ public class UserController {
         }
         try {
             service.updateId(id, dto);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -84,7 +85,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         try {
             service.findId(id);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";

@@ -2,6 +2,7 @@ package fr.vertours.poseidon.controller;
 
 
 import fr.vertours.poseidon.dto.BidListDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IBidListService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,17 +18,17 @@ import javax.validation.Valid;
 @Slf4j
 public class BidListController {
 
-    private final IBidListService bidService;
+    private final IBidListService service;
 
-    public BidListController(IBidListService bidService) {
-        this.bidService = bidService;
+    public BidListController(IBidListService service) {
+        this.service = service;
     }
 
 
     //http://localhost:8080/bidList/list
     @RequestMapping("/bidList/list")                    // Request ou GetMapping?
     public String home(Model model) {
-        model.addAttribute("list", bidService.findAll());
+        model.addAttribute("list", service.findAll());
         return "bidList/list";
     }
     //http://localhost:8080/bidList/add
@@ -42,11 +43,9 @@ public class BidListController {
             log.error("field Validation errors");
             return "bidList/add";
         }
+            service.save(dto);
 
-            bidService.save(dto);
-
-
-        model.addAttribute("list", bidService.findAll());
+        model.addAttribute("list", service.findAll());
         return "bidList/list";
     }
 
@@ -55,8 +54,8 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, BidListDTO dto) {
         try {
-            bidService.findId(id);
-        } catch (IllegalArgumentException e) {
+            service.findId(id);
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
@@ -72,7 +71,7 @@ public class BidListController {
             log.error("field Validation errors");
             return "bidList/update";
         }
-        bidService.updateId(id, dto);
+        service.updateId(id, dto);
         return "redirect:/bidList/list";
     }
 
@@ -81,13 +80,13 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         try {
-            bidService.findId(id);
-        } catch (IllegalArgumentException e) {
+            service.findId(id);
+        } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
-        bidService.deleteId(id);
+        service.deleteId(id);
 
         return "redirect:/bidList/list";
     }

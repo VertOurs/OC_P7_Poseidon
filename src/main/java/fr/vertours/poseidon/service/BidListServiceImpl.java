@@ -2,6 +2,7 @@ package fr.vertours.poseidon.service;
 
 import fr.vertours.poseidon.domain.BidList;
 import fr.vertours.poseidon.dto.BidListDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.BidListRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class BidListServiceImpl implements IBidListService{
     @Override
     public BidList findId(Integer id) {
         BidList bidList = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid Id:" + id));
+                () -> new InvalidIDException(id));
 
         return bidList;
     }
@@ -46,7 +47,7 @@ public class BidListServiceImpl implements IBidListService{
     @Transactional
     public void updateId(Integer id, BidListDTO dto) {
         BidList bidList = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid Id:" + id));
+                () -> new InvalidIDException(id));
 
            bidList.setAccount(dto.getAccount());
            bidList.setType(dto.getType());

@@ -2,9 +2,9 @@ package fr.vertours.poseidon.service;
 
 import fr.vertours.poseidon.domain.User;
 import fr.vertours.poseidon.dto.UserDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class UserServiceImpl implements IUserService{
     }
 
     @PostConstruct
-    private void initAdminUser() {
+    public void initAdminUser() {
         User admin = new User(
                 "Admin@Poseidon.com",
                 encoder.encode("Password"),
@@ -57,14 +57,14 @@ public class UserServiceImpl implements IUserService{
     @Override
     public User findId(Integer id) {
        return repository.findById(id).orElseThrow(
-               () -> new IllegalArgumentException("Invalid user Id:" + id));
+               () -> new InvalidIDException(id));
     }
 
     @Override
     @Transactional
     public void updateId(Integer id, UserDTO dto) {
         User user = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid user Id:" + id));
+                () -> new InvalidIDException(id));
 
         user.setUsername(dto.getUsername());
         user.setPassword(encoder.encode(dto.getPassword()));

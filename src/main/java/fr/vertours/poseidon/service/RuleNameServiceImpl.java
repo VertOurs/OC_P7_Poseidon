@@ -2,6 +2,7 @@ package fr.vertours.poseidon.service;
 
 import fr.vertours.poseidon.domain.RuleName;
 import fr.vertours.poseidon.dto.RuleNameDTO;
+import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.repository.RuleNameRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class RuleNameServiceImpl implements IRuleNameService {
     @Override
     public RuleName findId(Integer id) {
         RuleName ruleName = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
         return ruleName;
     }
 
@@ -46,7 +47,7 @@ public class RuleNameServiceImpl implements IRuleNameService {
     @Transactional
     public void updateId(Integer id, RuleNameDTO dto) {
         RuleName ruleName = repository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Invalid CurvePoint Id:" + id));
+                () -> new InvalidIDException(id));
         ruleName.setName(dto.getName());
         ruleName.setDescription(dto.getDescription());
         ruleName.setJson(dto.getJson());
