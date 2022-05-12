@@ -1,7 +1,6 @@
 package fr.vertours.poseidon.controller;
 
 import fr.vertours.poseidon.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +15,10 @@ public class LoginController {
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    @GetMapping("/login")
-    public ModelAndView login() {
-        return new ModelAndView("login");
-    }
+//    @GetMapping("/login")
+//    public ModelAndView login() {
+//        return new ModelAndView("loginEssai");
+//    }
 
 
 //    @GetMapping("secure/article-details")

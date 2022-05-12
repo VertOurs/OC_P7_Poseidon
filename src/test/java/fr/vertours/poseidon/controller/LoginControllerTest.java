@@ -18,12 +18,12 @@ class LoginControllerTest {
     LoginController classUnderTest = new LoginController(repository);
 
 
-    @Test
-    void login() {
-        ModelAndView tested = classUnderTest.login();
-
-        assertEquals("login", tested.getViewName());
-    }
+//    @Test
+//    void login() {
+//        ModelAndView tested = classUnderTest.login();
+//
+//        assertEquals("login", tested.getViewName());
+//    }
 
     @Test
     void error() {
