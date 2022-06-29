@@ -27,10 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         String[] ressources = new String[] {
                 "/", "/css/**", "/img/**", "/app/**",
         };
-        String[] userEP = new String[] {
-                "/trade/**", "/ruleName/**", "/rating/**",
-                "/curvePoint/**", "/bidList/**"
-        };
+
         String[] adminEP = new String[] {
                 "/user/**", "/admin/**"
         };
@@ -38,17 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(adminEP).hasAuthority("ADMIN")
-                    .antMatchers(userEP).hasAnyAuthority("USER","ADMIN" )
                     .antMatchers(ressources).permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginProcessingUrl("/app/login")
-//                    .usernameParameter("username")
-//                    .passwordParameter("password")
                     .successHandler(successHandler).permitAll()
                 .and()
-                .oauth2Login()
+                .oauth2Login().defaultSuccessUrl("/bidList/list")
                 .and()
                     .logout()
                     .logoutUrl("/app-logout")

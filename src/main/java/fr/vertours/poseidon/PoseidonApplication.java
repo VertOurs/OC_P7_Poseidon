@@ -1,6 +1,5 @@
 package fr.vertours.poseidon;
 
-import fr.vertours.poseidon.domain.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

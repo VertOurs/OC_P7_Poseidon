@@ -22,7 +22,6 @@ public class TradeServiceImpl implements ITradeService {
         this.repository = repository;
     }
 
-
     @Override
     public List<Trade> findAll() {
         return repository.findAll();
@@ -35,14 +34,12 @@ public class TradeServiceImpl implements ITradeService {
         repository.save(trade);
         log.debug("Entity saved in DB : "+ trade.toString());
     }
-
     @Override
     public Trade findId(Integer id) {
         Trade trade = repository.findById(id).orElseThrow(
                 () -> new InvalidIDException(id));
         return trade;
     }
-
     @Override
     public void updateId(Integer id, TradeDTO dto) {
         Trade trade = repository.findById(id).orElseThrow(
@@ -53,7 +50,6 @@ public class TradeServiceImpl implements ITradeService {
         repository.save(trade);
         log.debug("Entity update in DB : "+ trade.toString());
     }
-
     @Override
     public void deleteId(Integer id) {
         repository.deleteById(id);

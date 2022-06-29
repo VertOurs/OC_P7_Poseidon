@@ -26,7 +26,7 @@ public class BidListController {
 
 
     //http://localhost:8080/bidList/list
-    @RequestMapping("/bidList/list")                    // Request ou GetMapping?
+    @RequestMapping("/bidList/list")
     public String home(Model model) {
         model.addAttribute("list", service.findAll());
         return "bidList/list";
