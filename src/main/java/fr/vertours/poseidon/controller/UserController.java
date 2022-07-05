@@ -1,5 +1,6 @@
 package fr.vertours.poseidon.controller;
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
 import fr.vertours.poseidon.domain.User;
 import fr.vertours.poseidon.dto.UserDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
@@ -52,15 +53,16 @@ public class UserController {
     }
 
     @GetMapping("/user/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model,
-                                 UserDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        User user;
         try {
-            service.findId(id);
+            user = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
+        model.addAttribute("userDTO", ConverterEntityToDTO.getUserDTO(user));
         return "user/update";
     }
 

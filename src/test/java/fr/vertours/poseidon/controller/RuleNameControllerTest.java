@@ -99,7 +99,7 @@ class RuleNameControllerTest {
         RuleName entity = getEntity1();
         when(service.findId(5)).thenReturn(entity);
 
-        String tested = classUnderTest.showUpdateForm(5, model, dto);
+        String tested = classUnderTest.showUpdateForm(5, model);
 
         assertEquals("ruleName/update", tested);
         verify(service, times(1)).findId(5);
@@ -111,7 +111,7 @@ class RuleNameControllerTest {
         RuleName entity = getEntity1();
         when(service.findId(50)).thenThrow(InvalidIDException.class);
 
-        String tested = classUnderTest.showUpdateForm(50, model, dto);
+        String tested = classUnderTest.showUpdateForm(50, model);
 
         assertEquals("404", tested);
     }

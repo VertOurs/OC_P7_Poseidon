@@ -20,7 +20,7 @@
 				<label for="fullname" class="col-sm-2 control-label">Full Name</label>
 				<div class="col-sm-10">
 					<div>
-						<input th:field="*{fullname}" type="text" class="col-4" id="fullname" placeholder="Full Name">
+						<input th:field="*{fullname}" type="text" class="col-4" id="fullname" th:placeholder="${userDTO.fullname}">
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{fullname}"> </span>
@@ -31,7 +31,7 @@
 				<label for="username" class="col-sm-2 control-label">User Name</label>
 				<div class="col-sm-10">
 					<div>
-						<input th:field="*{username}" type="text" class="col-4" id="username" placeholder="User Name">
+						<input th:field="*{username}" type="text" class="col-4" id="username" th:placeholder="${userDTO.username}">
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{username}"> </span>
@@ -42,7 +42,7 @@
 				<label for="password" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
 					<div>
-						<input th:field="*{password}" type="password" class="col-4" id="password" placeholder="Password" >
+						<input th:field="*{password}" type="password" class="col-4" id="password" placeholder="****" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{password}"> </span>

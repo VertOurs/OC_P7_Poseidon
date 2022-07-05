@@ -20,7 +20,7 @@
 				<label for="curveId" class="col-form-label">curveId</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{curveId}" type="number" class="form-control" id="curveId" placeholder="Curve Id" >
+						<input th:field="*{curveId}" type="number" class="form-control" id="curveId" th:placeholder="${curvePointDTO.curveId}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{curveId}"> </span>
@@ -32,7 +32,7 @@
 				<label for="term" class="col-form-label">term</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{term}" type="number" class="form-control" id="term" placeholder="Term" >
+						<input th:field="*{term}" type="number" class="form-control" id="term" th:placeholder="${curvePointDTO.term}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{term}"> </span>
@@ -45,7 +45,7 @@
 				<label for="value" class="col-form-label">value</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{value}" type="number" class="form-control" id="value" placeholder="Value" >
+						<input th:field="*{value}" type="number" class="form-control" id="value" th:placeholder="${curvePointDTO.value}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{value}"> </span>

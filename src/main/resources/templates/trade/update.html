@@ -18,7 +18,7 @@
 				<label for="account" class="col-form-label">Account</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{account}" type="text" class="form-control" id="account" placeholder="Account" >
+						<input th:field="*{account}" type="text" class="form-control" id="account" th:placeholder="${tradeDTO.account}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{account}"> </span>
@@ -31,7 +31,7 @@
 				<label for="type" class="col-form-label">Type</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{type}" type="text" class="form-control" id="type" placeholder="Type" >
+						<input th:field="*{type}" type="text" class="form-control" id="type" th:placeholder="${tradeDTO.type}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{type}"> </span>
@@ -44,7 +44,7 @@
 				<label for="buyQuantity" class="col-form-label">buy quantity</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{buyQuantity}" type="number" class="form-control" id="buyQuantity" placeholder="buy quantity" >
+						<input th:field="*{buyQuantity}" type="number" class="form-control" id="buyQuantity" th:placeholder="${tradeDTO.buyQuantity}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{buyQuantity}"> </span>

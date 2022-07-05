@@ -1,5 +1,6 @@
 package fr.vertours.poseidon.controller;
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
 import fr.vertours.poseidon.domain.RuleName;
 import fr.vertours.poseidon.dto.RuleNameDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
@@ -48,15 +49,16 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model,
-                                 RuleNameDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        RuleName ruleName;
         try {
-            service.findId(id);
+            ruleName = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
+        model.addAttribute("ruleNameDTO", ConverterEntityToDTO.getRuleNameDTO(ruleName));
         return "ruleName/update";
     }
 

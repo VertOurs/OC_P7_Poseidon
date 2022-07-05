@@ -4,6 +4,7 @@ import fr.vertours.poseidon.domain.BidList;
 import fr.vertours.poseidon.dto.BidListDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IBidListService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ class BidListControllerTest {
         BidList entity = getEntity1();
         when(service.findId(5)).thenReturn(entity);
 
-        String tested = classUnderTest.showUpdateForm(5, model, dto);
+        String tested = classUnderTest.showUpdateForm(5, model);
 
         assertEquals("bidList/update", tested);
         verify(service, times(1)).findId(5);
@@ -111,7 +112,7 @@ class BidListControllerTest {
         BidList entity = getEntity1();
         when(service.findId(50)).thenThrow(InvalidIDException.class);
 
-        String tested = classUnderTest.showUpdateForm(50, model, dto);
+        String tested = classUnderTest.showUpdateForm(50, model);
 
         assertEquals("404", tested);
     }

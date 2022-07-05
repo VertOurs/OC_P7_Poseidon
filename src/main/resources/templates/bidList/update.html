@@ -20,7 +20,7 @@
 				<label for="account" class="col-form-label">Account</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{account}" type="text" class="form-control" id="account" placeholder="Account" >
+						<input th:field="*{account}" type="text" class="form-control" id="account" th:placeholder="${bidListDTO.account}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{account}"> </span>
@@ -33,7 +33,7 @@
 				<label for="type" class="col-form-label">Type</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{type}" type="text" class="form-control" id="type" placeholder="Type" >
+						<input th:field="*{type}" type="text" class="form-control" id="type" th:placeholder="${bidListDTO.type}"  >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{type}"> </span>
@@ -46,7 +46,7 @@
 				<label for="bidQuantity" class="col-form-label">Bid quantity</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{bidQuantity}" type="number" class="form-control" id="bidQuantity" placeholder="Bid quantity" >
+						<input th:field="*{bidQuantity}" type="number" class="form-control" id="bidQuantity" th:placeholder="${bidListDTO.bidQuantity}">
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{bidQuantity}"> </span>

@@ -2,6 +2,8 @@ package fr.vertours.poseidon.controller;
 
 
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
+import fr.vertours.poseidon.domain.CurvePoint;
 import fr.vertours.poseidon.dto.CurvePointDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.ICurveService;
@@ -51,15 +53,16 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model,
-                                 CurvePointDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        CurvePoint curvePoint ;
         try {
-            service.findId(id);
+            curvePoint = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
+        model.addAttribute("curvePointDTO", ConverterEntityToDTO.getCurvePointDTO(curvePoint));
         return "curvePoint/update";
     }
 

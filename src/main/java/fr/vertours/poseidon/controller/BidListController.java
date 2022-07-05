@@ -1,6 +1,8 @@
 package fr.vertours.poseidon.controller;
 
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
+import fr.vertours.poseidon.domain.BidList;
 import fr.vertours.poseidon.dto.BidListDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IBidListService;
@@ -52,15 +54,16 @@ public class BidListController {
 
 
     @GetMapping("/bidList/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model, BidListDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        BidList bidList;
         try {
-            service.findId(id);
+             bidList = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
-
+        model.addAttribute("bidListDTO", ConverterEntityToDTO.getBidListDTO(bidList));
         return "bidList/update";
     }
 

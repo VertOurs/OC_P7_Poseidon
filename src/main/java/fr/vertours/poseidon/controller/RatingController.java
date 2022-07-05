@@ -1,5 +1,7 @@
 package fr.vertours.poseidon.controller;
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
+import fr.vertours.poseidon.domain.Rating;
 import fr.vertours.poseidon.dto.RatingDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
 import fr.vertours.poseidon.service.IRatingService;
@@ -48,15 +50,16 @@ public class RatingController {
     }
 
     @GetMapping("/rating/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model, RatingDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Rating rating;
         try {
-            service.findId(id);
+            rating = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
-
+        model.addAttribute("ratingDTO", ConverterEntityToDTO.getRatingDTO(rating));
         return "rating/update";
     }
 

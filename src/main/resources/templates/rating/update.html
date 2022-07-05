@@ -21,7 +21,7 @@
 				<label for="moodysRating" class="col-form-label">moodysRating</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{moodysRating}" type="text" class="form-control" id="moodysRating" placeholder="moodysRating" >
+						<input th:field="*{moodysRating}" type="text" class="form-control" id="moodysRating" th:placeholder="${ratingDTO.moodysRating}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{moodysRating}"> </span>
@@ -34,7 +34,7 @@
 				<label for="sandPRating" class="col-form-label">sandPRating</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{sandPRating}" type="text" class="form-control" id="sandPRating" placeholder="sandPRating" >
+						<input th:field="*{sandPRating}" type="text" class="form-control" id="sandPRating" th:placeholder="${ratingDTO.sandPRating}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{sandPRating}"> </span>
@@ -46,7 +46,7 @@
 				<label for="fitchRating" class="col-form-label">fitchRating</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{fitchRating}" type="text" class="form-control" id="fitchRating" placeholder="fitchRating" >
+						<input th:field="*{fitchRating}" type="text" class="form-control" id="fitchRating" th:placeholder="${ratingDTO.fitchRating}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{fitchRating}"> </span>
@@ -58,7 +58,7 @@
 				<label for="orderNumber" class="col-form-label">orderNumber</label>
 				<div class="col-md-8">
 					<div>
-						<input th:field="*{orderNumber}" type="number" class="form-control" id="orderNumber" placeholder="orderNumber" >
+						<input th:field="*{orderNumber}" type="number" class="form-control" id="orderNumber" th:placeholder="${ratingDTO.orderNumber}" >
 					</div>
 					<div>
 						<span class="text-danger" th:errors="*{orderNumber}"> </span>

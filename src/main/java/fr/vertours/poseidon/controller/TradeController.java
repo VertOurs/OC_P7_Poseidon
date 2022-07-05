@@ -1,5 +1,6 @@
 package fr.vertours.poseidon.controller;
 
+import fr.vertours.poseidon.converter.ConverterEntityToDTO;
 import fr.vertours.poseidon.domain.Trade;
 import fr.vertours.poseidon.dto.TradeDTO;
 import fr.vertours.poseidon.exception.InvalidIDException;
@@ -48,15 +49,16 @@ public class TradeController {
     }
 
     @GetMapping("/trade/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model,
-                                 TradeDTO dto) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Trade trade;
         try {
-            service.findId(id);
+            trade = service.findId(id);
         } catch (InvalidIDException e) {
             log.error("Error message: "+ e.getMessage()
                     + "  StackTrace: " + e.getStackTrace());
             return "404";
         }
+        model.addAttribute("tradeDTO", ConverterEntityToDTO.getTradeDTO(trade));
         return "trade/update";
     }
 
